@@ -11317,6 +11317,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1660735818}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &807085765
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 807085767}
+  - component: {fileID: 807085766}
+  m_Layer: 0
+  m_Name: APIClient
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &807085766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807085765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03971d9cd9f5c2442a30b1cb89b0be58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simulateCalls: 1
+  baseUrl: http://endpoint.com/api
+--- !u!4 &807085767
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807085765}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.20379466, y: 1.2240473, z: -0.1412681}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &822541161
 GameObject:
   m_ObjectHideFlags: 0
@@ -22423,7 +22469,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1626082498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30966,6 +31012,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1621999554724952559, guid: 06a85f32ffee9fb489dd1e6fe4f50ef5, type: 3}
+      propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1621999554724952559, guid: 06a85f32ffee9fb489dd1e6fe4f50ef5, type: 3}
+      propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 807085766}
+    - target: {fileID: 1621999554724952559, guid: 06a85f32ffee9fb489dd1e6fe4f50ef5, type: 3}
+      propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GetComponentById
+      objectReference: {fileID: 0}
+    - target: {fileID: 1621999554724952559, guid: 06a85f32ffee9fb489dd1e6fe4f50ef5, type: 3}
+      propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: APIClient, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1621999554724952559, guid: 06a85f32ffee9fb489dd1e6fe4f50ef5, type: 3}
+      propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1621999554724952559, guid: 06a85f32ffee9fb489dd1e6fe4f50ef5, type: 3}
+      propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1621999554724952559, guid: 06a85f32ffee9fb489dd1e6fe4f50ef5, type: 3}
+      propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3054171925349460656, guid: 06a85f32ffee9fb489dd1e6fe4f50ef5, type: 3}
       propertyPath: m_Name
       value: Estintore
@@ -31023,6 +31097,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 542492647883040376, guid: 95d4590d6a679cd479402e03e0c09b72, type: 3}
+      propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 542492647883040376, guid: 95d4590d6a679cd479402e03e0c09b72, type: 3}
+      propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 807085766}
+    - target: {fileID: 542492647883040376, guid: 95d4590d6a679cd479402e03e0c09b72, type: 3}
+      propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GetDeviceById
+      objectReference: {fileID: 0}
+    - target: {fileID: 542492647883040376, guid: 95d4590d6a679cd479402e03e0c09b72, type: 3}
+      propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: APIClient, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 542492647883040376, guid: 95d4590d6a679cd479402e03e0c09b72, type: 3}
+      propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 542492647883040376, guid: 95d4590d6a679cd479402e03e0c09b72, type: 3}
+      propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 542492647883040376, guid: 95d4590d6a679cd479402e03e0c09b72, type: 3}
+      propertyPath: _whenSelect.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4433203559216175399, guid: 95d4590d6a679cd479402e03e0c09b72, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.14
@@ -31084,3 +31186,4 @@ SceneRoots:
   - {fileID: 1124159236}
   - {fileID: 4374840021953015004}
   - {fileID: 7336825898281967255}
+  - {fileID: 807085767}
