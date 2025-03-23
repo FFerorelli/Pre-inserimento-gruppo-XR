@@ -1,30 +1,45 @@
 using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
+using TMPro;
 
 public class APIClient : MonoBehaviour
 {
-    // Imposta a true per simulare le risposte API; false per chiamate reali.
+    // Identificatore dell'oggetto (impostabile da Inspector)
+    public int objectId;
+
+    // Indica se l'oggetto rappresenta un componente (true) oppure un device (false)
+    public bool isComponent = true;
+
+    // Flag per utilizzare chiamate simulate o reali
     public bool simulateCalls = true;
 
     // Base URL per le chiamate reali (modifica in base al tuo endpoint)
-    public string baseUrl = "http://endpoint.com/api";
+    public string baseUrl = "http://tuo-endpoint.com/api";
 
-    private void Start()
+    // Metodo che può essere chiamato (ad es. da un evento di interazione)
+    public void GetData()
     {
-
-    }
-
-    // Metodo pubblico per ottenere il dettaglio del componente
-    public void GetComponentById(int id)
-    {
-        if (simulateCalls)
-            StartCoroutine(GetComponentByIdSimulated(id));
+        if (isComponent)
+        {
+            if (simulateCalls)
+                StartCoroutine(GetComponentByIdSimulated(objectId));
+            else
+                StartCoroutine(GetComponentByIdCoroutine(objectId));
+        }
         else
-            StartCoroutine(GetComponentByIdCoroutine(id));
+        {
+            if (simulateCalls)
+                StartCoroutine(GetDeviceByIdSimulated(objectId));
+            else
+                StartCoroutine(GetDeviceByIdCoroutine(objectId));
+        }
     }
 
-    // Chiamata reale usando UnityWebRequest
+    // ------------------------------
+    // Chiamate per il Component (estintore)
+    // ------------------------------
+
     private IEnumerator GetComponentByIdCoroutine(int id)
     {
         string url = $"{baseUrl}/components/{id}";
@@ -34,49 +49,55 @@ public class APIClient : MonoBehaviour
         if (request.result != UnityWebRequest.Result.Success)
         {
             Debug.LogError("Errore nella chiamata API Component: " + request.error);
+            UpdatePanelWithText("Errore API Component: " + request.error);
         }
         else
         {
             string jsonResponse = request.downloadHandler.text;
             Debug.Log("Risposta API Component: " + jsonResponse);
-
-            // Parsing della risposta JSON
             ComponentData component = JsonUtility.FromJson<ComponentData>(jsonResponse);
-            Debug.Log("Component Name: " + component.name);
+
+            string infoText = $"Component:\n" +
+                              $"ID: {component.id}\n" +
+                              $"Name: {component.name}\n" +
+                              $"Type: {component.componentTypeDescription}\n" +
+                              $"Scadenza: {component.properties.data_scadenza}\n" +
+                              $"Ultima manutenzione: {component.properties.data_ultima_manutenzione}";
+            UpdatePanelWithText(infoText);
         }
     }
 
-    // Chiamata simulata per il componente
     private IEnumerator GetComponentByIdSimulated(int id)
     {
         yield return new WaitForSeconds(1f);
 
         string simulatedJson = $@"{{
-        ""id"": {id},
-        ""componentTypeDescription"": ""Extinguisher"",
-        ""name"": ""EXT_1"",
-        ""guid"": ""8c900b13-d10e-4124-8f4a-97271e1b1704"",
-        ""properties"": {{
-            ""data_scadenza"": ""2025-12-31"",
-            ""data_ultima_manutenzione"": ""2025-01-31""
-        }}
-    }}";
+            ""id"": {id},
+            ""componentTypeDescription"": ""Extinguisher"",
+            ""name"": ""EXT_1"",
+            ""guid"": ""8c900b13-d10e-4124-8f4a-97271e1b1704"",
+            ""properties"": {{
+                ""data_scadenza"": ""2025-12-31"",
+                ""data_ultima_manutenzione"": ""2025-01-31""
+            }}
+        }}";
 
         Debug.Log("Risposta Simulata API Component: " + simulatedJson);
         ComponentData component = JsonUtility.FromJson<ComponentData>(simulatedJson);
-        Debug.Log("Component Name (simulato): " + component.name);
+
+        string infoText = $"Component:\n" +
+                          $"ID: {component.id}\n" +
+                          $"Name: {component.name}\n" +
+                          $"Type: {component.componentTypeDescription}\n" +
+                          $"Scadenza: {component.properties.data_scadenza}\n" +
+                          $"Ultima manutenzione: {component.properties.data_ultima_manutenzione}";
+        UpdatePanelWithText(infoText);
     }
 
-    // Metodo pubblico per ottenere il dettaglio del device
-    public void GetDeviceById(int id)
-    {
-        if (simulateCalls)
-            StartCoroutine(GetDeviceByIdSimulated(id));
-        else
-            StartCoroutine(GetDeviceByIdCoroutine(id));
-    }
+    // ------------------------------
+    // Chiamate per il Device (sensore ambientale)
+    // ------------------------------
 
-    // Chiamata reale per il device
     private IEnumerator GetDeviceByIdCoroutine(int id)
     {
         string url = $"{baseUrl}/devices/{id}";
@@ -86,36 +107,75 @@ public class APIClient : MonoBehaviour
         if (request.result != UnityWebRequest.Result.Success)
         {
             Debug.LogError("Errore nella chiamata API Device: " + request.error);
+            UpdatePanelWithText("Errore API Device: " + request.error);
         }
         else
         {
             string jsonResponse = request.downloadHandler.text;
             Debug.Log("Risposta API Device: " + jsonResponse);
-
-            // Parsing della risposta JSON
             DeviceData device = JsonUtility.FromJson<DeviceData>(jsonResponse);
-            Debug.Log("Device Name: " + device.name);
+
+            string infoText = $"Device:\n" +
+                              $"ID: {device.id}\n" +
+                              $"Name: {device.name}\n" +
+                              $"Type: {device.deviceClassTypeDescription}\n" +
+                              $"Tipologia: {device.properties.tipologia}\n" +
+                              $"Unità di misura: {device.properties.unita_misura}";
+            UpdatePanelWithText(infoText);
         }
     }
 
-    // Chiamata simulata per il device
     private IEnumerator GetDeviceByIdSimulated(int id)
     {
         yield return new WaitForSeconds(1f);
 
         string simulatedJson = $@"{{
-        ""id"": {id},
-        ""deviceClassTypeDescription"": ""Meter"",
-        ""name"": ""DEV_0"",
-        ""guid"": ""01946477-b9ec-7d57-9399-f83c74caea70"",
-        ""properties"": {{
-            ""tipologia"": ""Temperatura"",
-            ""unita_misura"": ""°C""
-        }}
-    }}";
+            ""id"": {id},
+            ""deviceClassTypeDescription"": ""Meter"",
+            ""name"": ""DEV_0"",
+            ""guid"": ""01946477-b9ec-7d57-9399-f83c74caea70"",
+            ""properties"": {{
+                ""tipologia"": ""Temperatura"",
+                ""unita_misura"": ""°C""
+            }}
+        }}";
 
         Debug.Log("Risposta Simulata API Device: " + simulatedJson);
         DeviceData device = JsonUtility.FromJson<DeviceData>(simulatedJson);
-        Debug.Log("Device Name (simulato): " + device.name);
+
+        string infoText = $"Device:\n" +
+                          $"ID: {device.id}\n" +
+                          $"Name: {device.name}\n" +
+                          $"Type: {device.deviceClassTypeDescription}\n" +
+                          $"Tipologia: {device.properties.tipologia}\n" +
+                          $"Unità di misura: {device.properties.unita_misura}";
+        UpdatePanelWithText(infoText);
+    }
+
+    // ------------------------------
+    // Metodi per aggiornare il pannello figlio
+    // ------------------------------
+
+    private void UpdatePanelWithText(string text)
+    {       
+        Transform panelTransform = transform.Find("InfoPanel");
+        if (panelTransform == null)
+        {
+            Debug.LogWarning("InfoPanel non trovato come figlio di " + gameObject.name);
+            return;
+        }
+
+        GameObject panel = panelTransform.gameObject;
+        panel.SetActive(true);
+        
+        TMP_Text tmpText = panel.GetComponentInChildren<TMP_Text>();
+        if (tmpText != null)
+        {
+            tmpText.text = text;
+        }
+        else
+        {
+            Debug.LogWarning("Componente TMP_Text non trovato nel pannello " + panel.name);
+        }
     }
 }
