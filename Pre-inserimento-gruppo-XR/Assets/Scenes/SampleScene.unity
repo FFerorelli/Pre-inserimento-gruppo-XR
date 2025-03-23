@@ -14253,7 +14253,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!1 &984545447
 GameObject:
@@ -24568,7 +24568,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!1 &1687692636
 GameObject:
@@ -31600,6 +31600,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2772108336690880726, guid: 95d4590d6a679cd479402e03e0c09b72, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2999283271444457937, guid: 95d4590d6a679cd479402e03e0c09b72, type: 3}
       propertyPath: m_Name
       value: Sensore
@@ -31702,6 +31706,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3900500156176782012, guid: 06a85f32ffee9fb489dd1e6fe4f50ef5, type: 3}
       propertyPath: m_IgnoreReversedGraphics
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4048904366740112868, guid: 06a85f32ffee9fb489dd1e6fe4f50ef5, type: 3}
+      propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5555986453794872798, guid: 06a85f32ffee9fb489dd1e6fe4f50ef5, type: 3}
