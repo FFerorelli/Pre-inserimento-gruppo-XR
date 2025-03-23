@@ -5,21 +5,25 @@ using TMPro;
 
 public class APIClient : MonoBehaviour
 {
-    // Identificatore dell'oggetto (impostabile da Inspector)
+    // Identificatore dell'oggetto (impostabile in Inspector)
     public int objectId;
 
-    // Indica se l'oggetto rappresenta un componente (true) oppure un device (false)
+    // Flag per distinguere se l'oggetto rappresenta un component (true) o un device (false)
     public bool isComponent = true;
 
-    // Flag per utilizzare chiamate simulate o reali
+    // Flag per scegliere se usare chiamate simulate o reali
     public bool simulateCalls = true;
 
     // Base URL per le chiamate reali (modifica in base al tuo endpoint)
     public string baseUrl = "http://tuo-endpoint.com/api";
 
-    // Metodo che può essere chiamato (ad es. da un evento di interazione)
+    // Metodo chiamato (ad esempio, dall'interazione dell'utente)
     public void GetData()
     {
+        // Mostra il pannello Spinner e nascondi il pannello InfoPanel
+        ShowSpinner();
+
+        // Avvia la chiamata API in base al tipo di oggetto
         if (isComponent)
         {
             if (simulateCalls)
@@ -36,9 +40,66 @@ public class APIClient : MonoBehaviour
         }
     }
 
-    // ------------------------------
-    // Chiamate per il Component (estintore)
-    // ------------------------------
+    // Mostra il pannello Spinner e nasconde InfoPanel
+    private void ShowSpinner()
+    {
+        // Attiva il pannello Spinner
+        Transform spinnerTransform = transform.Find("Spinner");
+        if (spinnerTransform != null)
+        {
+            spinnerTransform.gameObject.SetActive(true);
+        }
+        else
+        {
+            Debug.LogWarning("Spinner panel non trovato in " + gameObject.name);
+        }
+
+        // Nascondi il pannello InfoPanel
+        Transform infoPanelTransform = transform.Find("InfoPanel");
+        if (infoPanelTransform != null)
+        {
+            infoPanelTransform.gameObject.SetActive(false);
+        }
+    }
+
+    // Aggiorna l'InfoPanel con il testo finale e nasconde il pannello Spinner
+    private void UpdatePanelWithText(string text)
+    {
+        // Nascondi il pannello Spinner
+        Transform spinnerTransform = transform.Find("Spinner");
+        if (spinnerTransform != null)
+        {
+            spinnerTransform.gameObject.SetActive(false);
+        }
+
+        // Trova il pannello InfoPanel
+        Transform infoPanelTransform = transform.Find("InfoPanel");
+        if (infoPanelTransform == null)
+        {
+            Debug.LogWarning("InfoPanel non trovato in " + gameObject.name);
+            return;
+        }
+        GameObject infoPanel = infoPanelTransform.gameObject;
+        infoPanel.SetActive(true);
+
+        // Aggiorna il componente TMP_Text all'interno di InfoPanel
+        TMP_Text tmpText = infoPanel.GetComponentInChildren<TMP_Text>(true);
+        if (tmpText != null)
+        {
+            tmpText.text = text;
+        }
+        else
+        {
+            Debug.LogWarning("TMP_Text non trovato in InfoPanel di " + gameObject.name);
+        }
+    }
+
+    private void UpdatePanelWithError(string error)
+    {
+        UpdatePanelWithText("Errore: " + error);
+    }
+
+    // --- Chiamate API per il Component (Estintore) ---
 
     private IEnumerator GetComponentByIdCoroutine(int id)
     {
@@ -49,7 +110,7 @@ public class APIClient : MonoBehaviour
         if (request.result != UnityWebRequest.Result.Success)
         {
             Debug.LogError("Errore nella chiamata API Component: " + request.error);
-            UpdatePanelWithText("Errore API Component: " + request.error);
+            UpdatePanelWithError(request.error);
         }
         else
         {
@@ -82,7 +143,7 @@ public class APIClient : MonoBehaviour
             }}
         }}";
 
-        Debug.Log("Risposta Simulata API Component: " + simulatedJson);
+        Debug.Log("Risposta simulata API Component: " + simulatedJson);
         ComponentData component = JsonUtility.FromJson<ComponentData>(simulatedJson);
 
         string infoText = $"Component:\n" +
@@ -94,9 +155,7 @@ public class APIClient : MonoBehaviour
         UpdatePanelWithText(infoText);
     }
 
-    // ------------------------------
-    // Chiamate per il Device (sensore ambientale)
-    // ------------------------------
+    // --- Chiamate API per il Device (Sensore Ambientale) ---
 
     private IEnumerator GetDeviceByIdCoroutine(int id)
     {
@@ -107,7 +166,7 @@ public class APIClient : MonoBehaviour
         if (request.result != UnityWebRequest.Result.Success)
         {
             Debug.LogError("Errore nella chiamata API Device: " + request.error);
-            UpdatePanelWithText("Errore API Device: " + request.error);
+            UpdatePanelWithError(request.error);
         }
         else
         {
@@ -140,7 +199,7 @@ public class APIClient : MonoBehaviour
             }}
         }}";
 
-        Debug.Log("Risposta Simulata API Device: " + simulatedJson);
+        Debug.Log("Risposta simulata API Device: " + simulatedJson);
         DeviceData device = JsonUtility.FromJson<DeviceData>(simulatedJson);
 
         string infoText = $"Device:\n" +
@@ -150,32 +209,5 @@ public class APIClient : MonoBehaviour
                           $"Tipologia: {device.properties.tipologia}\n" +
                           $"Unità di misura: {device.properties.unita_misura}";
         UpdatePanelWithText(infoText);
-    }
-
-    // ------------------------------
-    // Metodi per aggiornare il pannello figlio
-    // ------------------------------
-
-    private void UpdatePanelWithText(string text)
-    {       
-        Transform panelTransform = transform.Find("InfoPanel");
-        if (panelTransform == null)
-        {
-            Debug.LogWarning("InfoPanel non trovato come figlio di " + gameObject.name);
-            return;
-        }
-
-        GameObject panel = panelTransform.gameObject;
-        panel.SetActive(true);
-        
-        TMP_Text tmpText = panel.GetComponentInChildren<TMP_Text>();
-        if (tmpText != null)
-        {
-            tmpText.text = text;
-        }
-        else
-        {
-            Debug.LogWarning("Componente TMP_Text non trovato nel pannello " + panel.name);
-        }
     }
 }
