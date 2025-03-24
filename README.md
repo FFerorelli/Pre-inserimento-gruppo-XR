@@ -1,6 +1,5 @@
 # Pre-inserimento-gruppo-XR
 
-
 ## Flusso e Responsabilità
 
 - **APIService:**  
@@ -24,14 +23,13 @@
 
 ## Utilizzo
 
-- **Movimento**
-Teleport attraverso Microgestures
+- **Movimento:**  
+  Teleport attraverso Microgestures
 
 - **Esecuzione:**  
-   - L'interazione utente (gestita da toccando gli oggetti o direttamente dal `UIController`) invoca `RequestData()`.
-   - Il `UIController` attiva il pannello Spinner e chiede i dati tramite il client API.
-   - Al completamento della chiamata, il `UIController` aggiorna l’InfoPanel tramite il `PanelManager` con i dati ottenuti o un messaggio di errore.
+  - L'interazione utente (gestita toccando gli oggetti o direttamente dal `UIController`) invoca `RequestData()`.
+  - Il `UIController` attiva il pannello Spinner e chiede i dati tramite il client API.
+  - Al completamento della chiamata, il `UIController` aggiorna l’InfoPanel tramite il `PanelManager` con i dati ottenuti o un messaggio di errore.
 
-**Video:**  
+## Video dimostrativo
 [![Pre Inserimento gruppo XR](https://img.youtube.com/vi/zECr6xM_Zqw/0.jpg)](https://youtube.com/shorts/zECr6xM_Zqw?feature=share)
-
