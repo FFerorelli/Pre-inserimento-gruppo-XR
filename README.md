@@ -32,4 +32,6 @@ Teleport attraverso Microgestures
    - Il `UIController` attiva il pannello Spinner e chiede i dati tramite il client API.
    - Al completamento della chiamata, il `UIController` aggiorna l’InfoPanel tramite il `PanelManager` con i dati ottenuti o un messaggio di errore.
 
+**Video:**  
+[![Pre Inserimento gruppo XR](https://img.youtube.com/vi/zECr6xM_Zqw/0.jpg)](https://youtube.com/shorts/zECr6xM_Zqw?feature=share)
 
