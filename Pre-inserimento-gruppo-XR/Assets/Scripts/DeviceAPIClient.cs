@@ -6,6 +6,7 @@ using Models;
 
 namespace API
 {
+    // Client API specifico per device (sensori)
     public class DeviceAPIClient : MonoBehaviour
     {
         public string baseUrl = "http://tuo-endpoint.com/api";
@@ -27,6 +28,7 @@ namespace API
             }
         }
 
+        // Simula chiamata API
         private IEnumerator SimulateDeviceCall(int id, Action<DeviceData> onSuccess, Action<string> onError)
         {
             yield return new WaitForSeconds(1f);

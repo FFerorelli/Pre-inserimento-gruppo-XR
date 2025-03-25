@@ -5,9 +5,10 @@ namespace UI
 {
     public class PanelManager : MonoBehaviour
     {
+        // Gestisce attivazione/disattivazione dei pannelli UI (spinner e info)
         [Header("Panel References")]
-        public GameObject spinnerPanel;   // Pannello che contiene lo spinner
-        public GameObject infoPanel;      // Pannello che contiene il Canvas con il TMP_Text
+        public GameObject spinnerPanel;   
+        public GameObject infoPanel;     
 
         private TMP_Text infoText;
 

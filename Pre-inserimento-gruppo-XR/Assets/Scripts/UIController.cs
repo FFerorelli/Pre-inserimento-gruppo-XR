@@ -10,11 +10,11 @@ public class UIController : MonoBehaviour
     public int objectId = 1;        // ID dell'oggetto
 
     [Header("API Clients")]
-    public ComponentAPIClient componentClient;  // Assegnalo tramite Inspector se l'oggetto rappresenta un componente
-    public DeviceAPIClient deviceClient;        // Assegnalo se l'oggetto rappresenta un device
+    public ComponentAPIClient componentClient;  
+    public DeviceAPIClient deviceClient;        
 
     [Header("UI")]
-    public PanelManager panelManager;           // Riferimento al PanelManager (lo puoi trovare come figlio)
+    public PanelManager panelManager;           
 
     // Metodo chiamato dall'interazione dell'utente
     public void RequestData()

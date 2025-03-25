@@ -6,6 +6,7 @@ using Models;
 
 namespace API
 {
+    // Client API specifico per i component (estintori)
     public class ComponentAPIClient : MonoBehaviour
     {
         public string baseUrl = "http://tuo-endpoint.com/api";
@@ -27,6 +28,7 @@ namespace API
             }
         }
 
+        // Simula chiamata API
         private IEnumerator SimulateComponentCall(int id, Action<ComponentData> onSuccess, Action<string> onError)
         {
             yield return new WaitForSeconds(1f);

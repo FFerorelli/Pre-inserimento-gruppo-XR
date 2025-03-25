@@ -5,6 +5,8 @@ using System.Collections;
 
 namespace API
 {
+    // Servizio centrale per le chiamate HTTP (singleton)
+
     public class APIService : MonoBehaviour
     {
         public static APIService Instance;
